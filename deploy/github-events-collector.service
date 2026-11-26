@@ -1,0 +1,18 @@
+[Unit]
+Description=GitHub Global /events Collector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/github-events-collector
+ExecStart=/opt/github-events-collector/.venv/bin/python /opt/github-events-collector/collector.py
+Restart=always
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=30
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
